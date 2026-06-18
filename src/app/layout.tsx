@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${cinzel.variable} ${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex bg-[#0D0A06] text-[#D4C4A0]" style={{ fontFamily: "var(--font-body)" }}>
+      <body className="min-h-full flex bg-tavern-bg text-parchment-300" style={{ fontFamily: "var(--font-body)" }}>
         <Sidebar />
         <div className="flex-1 flex flex-col min-h-screen">
           <Navbar />

@@ -21,13 +21,13 @@ export function ArtisansClient() {
     let results = artisans;
 
     if (search) {
-      const q = search.toLowerCase();
+      const query = search.toLowerCase();
       results = results.filter(
         (a) =>
-          a.displayName.toLowerCase().includes(q) ||
-          a.title.toLowerCase().includes(q) ||
-          a.skills.some((s) => s.toLowerCase().includes(q)) ||
-          (a.guildName && a.guildName.toLowerCase().includes(q))
+          a.displayName.toLowerCase().includes(query) ||
+          a.title.toLowerCase().includes(query) ||
+          a.skills.some((s) => s.toLowerCase().includes(query)) ||
+          (a.guildName && a.guildName.toLowerCase().includes(query))
       );
     }
 
@@ -50,7 +50,13 @@ export function ArtisansClient() {
     return results;
   }, [search, availability, sort]);
 
-  const activeFilters = [availability, sort].filter(Boolean).length;
+  const hasActiveFilters = search || availability || sort;
+
+  function clearAll() {
+    setSearch("");
+    setAvailability("");
+    setSort("");
+  }
 
   return (
     <>
@@ -64,10 +70,10 @@ export function ArtisansClient() {
       <div className="flex flex-wrap gap-2 mb-6">
         <FilterDropdown label="All Artisans" options={availabilityOptions} value={availability} onChange={setAvailability} />
         <FilterDropdown label="Sort: Default" options={sortOptions} value={sort} onChange={setSort} />
-        {(search || activeFilters > 0) && (
+        {hasActiveFilters && (
           <button
-            onClick={() => { setSearch(""); setAvailability(""); setSort(""); }}
-            className="px-3 py-1.5 rounded-lg bg-[#241E15] border border-[#FFC520]/30 text-xs text-[#FFC520] hover:bg-[#FFC520]/10 transition-colors"
+            onClick={clearAll}
+            className="px-3 py-1.5 rounded-lg bg-tavern-surface-alt border border-gold-400/30 text-xs text-gold-400 hover:bg-gold-400/10 transition-colors"
           >
             Clear All
           </button>
@@ -81,8 +87,8 @@ export function ArtisansClient() {
               <div className="flex items-center gap-3 mb-3">
                 <Avatar initials={artisan.avatar} size="md" level={artisan.level} />
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-heading text-sm font-bold text-[#E8D9C0] truncate">{artisan.displayName}</h3>
-                  <p className="text-xs text-[#A08B60]">{artisan.title}</p>
+                  <h3 className="font-heading text-sm font-bold text-parchment-200 truncate">{artisan.displayName}</h3>
+                  <p className="text-xs text-parchment-500">{artisan.title}</p>
                 </div>
                 <div className={`w-2 h-2 rounded-full shrink-0 ${artisan.available ? "bg-green-400" : "bg-zinc-500"}`} />
               </div>
@@ -97,16 +103,16 @@ export function ArtisansClient() {
               </div>
 
               <div className="flex items-center justify-between text-xs">
-                <span className="text-[#5C4A2A]">{artisan.questsCompleted} quests</span>
+                <span className="text-tavern-border-glow">{artisan.questsCompleted} quests</span>
                 <span className="flex items-center gap-0.5">
                   <GoldAmount amount={artisan.hourlyRate} size="sm" />
-                  <span className="text-[10px] text-[#5C4A2A]">/hr</span>
+                  <span className="text-[10px] text-tavern-border-glow">/hr</span>
                 </span>
               </div>
 
               {artisan.guildName && (
-                <div className="mt-2 pt-2 border-t border-[#3D3425] text-[10px] text-[#5C4A2A]">
-                  Guild: <span className="text-[#A08B60]">{artisan.guildName}</span>
+                <div className="mt-2 pt-2 border-t border-tavern-border text-[10px] text-tavern-border-glow">
+                  Guild: <span className="text-parchment-500">{artisan.guildName}</span>
                 </div>
               )}
             </Card>
@@ -114,12 +120,12 @@ export function ArtisansClient() {
         </div>
       ) : (
         <div className="text-center py-16">
-          <p className="text-[#A08B60] font-heading text-lg">No artisans found</p>
-          <p className="text-sm text-[#5C4A2A] mt-2">Try adjusting your search or filters.</p>
+          <p className="text-parchment-500 font-heading text-lg">No artisans found</p>
+          <p className="text-sm text-tavern-border-glow mt-2">Try adjusting your search or filters.</p>
         </div>
       )}
 
-      <div className="mt-8 text-center text-sm text-[#5C4A2A]">
+      <div className="mt-8 text-center text-sm text-tavern-border-glow">
         Showing {filtered.length} of {artisans.length} artisans
       </div>
     </>

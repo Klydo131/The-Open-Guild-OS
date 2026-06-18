@@ -12,11 +12,11 @@ export function Card({ className, variant = "dark", hover = false, children, ...
       className={cn(
         "rounded-xl border transition-all duration-200",
         {
-          "bg-[#1A1510] border-[#3D3425]": variant === "dark",
-          "bg-[#241E15] border-[#3D3425]": variant === "surface",
-          "bg-gradient-to-b from-[#241E15] to-[#1A1510] border-[#5C4A2A]": variant === "featured",
+          "bg-tavern-surface border-tavern-border": variant === "dark",
+          "bg-tavern-surface-alt border-tavern-border": variant === "surface",
+          "bg-gradient-to-b from-tavern-surface-alt to-tavern-surface border-tavern-border-glow": variant === "featured",
         },
-        hover && "hover:border-[#5C4A2A] hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5 cursor-pointer",
+        hover && "hover:border-tavern-border-glow hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5 cursor-pointer",
         className
       )}
       {...props}
