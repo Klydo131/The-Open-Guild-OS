@@ -1,5 +1,6 @@
 "use client";
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { artisans } from "@/data/artisans";
 import { SearchBar } from "@/components/ui/SearchBar";
 import { FilterDropdown } from "@/components/ui/FilterDropdown";
@@ -83,7 +84,8 @@ export function ArtisansClient() {
       {filtered.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((artisan) => (
-            <Card key={artisan.id} variant="dark" hover className="p-5">
+            <Link key={artisan.id} href={`/artisans/${artisan.id}`}>
+            <Card variant="dark" hover className="p-5">
               <div className="flex items-center gap-3 mb-3">
                 <Avatar initials={artisan.avatar} size="md" level={artisan.level} />
                 <div className="flex-1 min-w-0">
@@ -116,6 +118,7 @@ export function ArtisansClient() {
                 </div>
               )}
             </Card>
+            </Link>
           ))}
         </div>
       ) : (

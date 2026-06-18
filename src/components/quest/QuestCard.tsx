@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ChevronRight, Clock } from "lucide-react";
 import { Quest } from "@/types";
 import { Badge } from "@/components/ui/Badge";
@@ -12,7 +13,7 @@ interface QuestCardProps {
 
 export function QuestCard({ quest }: QuestCardProps) {
   return (
-    <div className="flex items-center gap-4 p-4 rounded-xl bg-tavern-surface border border-tavern-border hover:border-tavern-border-glow transition-all duration-200 cursor-pointer group">
+    <Link href={`/quest-board/${quest.id}`} className="flex items-center gap-4 p-4 rounded-xl bg-tavern-surface border border-tavern-border hover:border-tavern-border-glow transition-all duration-200 cursor-pointer group">
       <div className="hidden sm:flex w-14 h-14 rounded-lg bg-tavern-surface-alt border border-tavern-border items-center justify-center shrink-0">
         <span className="text-2xl">{CATEGORY_ICONS[quest.category]}</span>
       </div>
@@ -56,6 +57,6 @@ export function QuestCard({ quest }: QuestCardProps) {
       </div>
 
       <ChevronRight className="w-5 h-5 text-tavern-border group-hover:text-tavern-border-glow transition-colors shrink-0" />
-    </div>
+    </Link>
   );
 }

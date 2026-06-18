@@ -1,5 +1,6 @@
 "use client";
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { guilds } from "@/data/guilds";
 import { SearchBar } from "@/components/ui/SearchBar";
 import { Card } from "@/components/ui/Card";
@@ -32,7 +33,8 @@ export function GuildHallClient() {
       {filtered.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filtered.map((guild) => (
-            <Card key={guild.id} variant="dark" hover className="p-5">
+            <Link key={guild.id} href={`/guild-hall/${guild.id}`}>
+            <Card variant="dark" hover className="p-5">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-tavern-surface-alt border border-tavern-border flex items-center justify-center shrink-0">
                   <span className="text-xl font-heading font-bold text-parchment-400">{guild.name.charAt(0)}</span>
@@ -52,6 +54,7 @@ export function GuildHallClient() {
                 </div>
               </div>
             </Card>
+            </Link>
           ))}
         </div>
       ) : (

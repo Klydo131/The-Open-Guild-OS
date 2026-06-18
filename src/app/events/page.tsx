@@ -1,7 +1,7 @@
 import { events } from "@/data/events";
 import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
 import { GoldAmount } from "@/components/ui/GoldAmount";
+import { JoinEventButton } from "@/components/events/JoinEventButton";
 import { Calendar, Users, Trophy } from "lucide-react";
 import type { GuildEvent } from "@/types";
 
@@ -46,9 +46,7 @@ export default function EventsPage() {
                 </div>
               )}
             </div>
-            <Button variant="secondary" size="sm" className="w-full mt-4">
-              Join Event
-            </Button>
+            <JoinEventButton eventId={event.id} />
           </Card>
         ))}
       </div>

@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -6,7 +7,7 @@ import { navigationItems } from "@/data/navigation";
 import { DAILY_REWARD_DAYS } from "@/lib/constants";
 import {
   Castle, ScrollText, Shield, Hammer, Target,
-  Award, Coins, Trophy, Flame
+  Award, Coins, Trophy, Flame, Check
 } from "lucide-react";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -16,7 +17,16 @@ const iconMap: Record<string, React.ElementType> = {
 
 export function Sidebar() {
   const pathname = usePathname();
-  const currentDay = 3;
+  const [currentDay, setCurrentDay] = useState(3);
+  const [claimed, setClaimed] = useState(false);
+
+  function handleClaim() {
+    if (claimed || currentDay >= DAILY_REWARD_DAYS) return;
+    setClaimed(true);
+    setTimeout(() => {
+      setCurrentDay((prev) => Math.min(prev + 1, DAILY_REWARD_DAYS));
+    }, 600);
+  }
 
   return (
     <aside className="hidden lg:flex flex-col w-56 bg-tavern-bg border-r border-tavern-border h-screen sticky top-0 pt-4 pb-6">
@@ -72,8 +82,17 @@ export function Sidebar() {
             )}>{day}</div>
           ))}
         </div>
-        <button className="mt-2 w-full text-[10px] font-heading font-bold uppercase bg-gold-400 text-tavern-bg rounded py-1 hover:bg-gold-300 transition-colors">
-          Claim Reward
+        <button
+          onClick={handleClaim}
+          disabled={claimed}
+          className={cn(
+            "mt-2 w-full text-[10px] font-heading font-bold uppercase rounded py-1 transition-colors flex items-center justify-center gap-1",
+            claimed
+              ? "bg-gold-400/20 text-gold-400 cursor-default"
+              : "bg-gold-400 text-tavern-bg hover:bg-gold-300"
+          )}
+        >
+          {claimed ? <><Check className="w-3 h-3" /> Claimed!</> : "Claim Reward"}
         </button>
       </div>
     </aside>
