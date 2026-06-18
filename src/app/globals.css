@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0D0A06;
+  --color-foreground: #D4C4A0;
+
+  --color-tavern-bg: #0D0A06;
+  --color-tavern-surface: #1A1510;
+  --color-tavern-surface-alt: #241E15;
+  --color-tavern-border: #3D3425;
+  --color-tavern-border-glow: #5C4A2A;
+
+  --color-gold-50: #FFF9E6;
+  --color-gold-100: #FFF0BF;
+  --color-gold-200: #FFE080;
+  --color-gold-300: #FFD040;
+  --color-gold-400: #FFC520;
+  --color-gold-500: #E5A800;
+  --color-gold-600: #B8860B;
+  --color-gold-700: #8B6914;
+  --color-gold-800: #5E4710;
+  --color-gold-900: #3D2E0A;
+
+  --color-parchment-50: #FDF8F0;
+  --color-parchment-100: #F5EDE0;
+  --color-parchment-200: #E8D9C0;
+  --color-parchment-300: #D4C4A0;
+  --color-parchment-400: #BFA97A;
+  --color-parchment-500: #A08B60;
+
+  --color-ember-400: #FF6B35;
+  --color-ember-500: #E85D26;
+
+  --font-heading: "Cinzel", serif;
+  --font-body: "Inter", sans-serif;
+
+  --animate-glow: glow 2s ease-in-out infinite;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(255, 197, 32, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(255, 197, 32, 0.4); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3D3425 #0D0A06;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0D0A06;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #3D3425;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #5C4A2A;
+}
+
+::selection {
+  background: rgba(255, 197, 32, 0.3);
+  color: #FFF9E6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0D0A06;
+  color: #D4C4A0;
+  font-family: var(--font-body);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
