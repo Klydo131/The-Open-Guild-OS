@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { QuestBoardClient } from "@/components/quest/QuestBoardClient";
+
+export const metadata: Metadata = {
+  title: "Quest Board — The Open Guild OS",
+  description: "Find quests that match your skills and earn gold for your craft.",
+};
 
 export default function QuestBoardPage() {
   return (

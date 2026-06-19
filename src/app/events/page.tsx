@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
 import { events } from "@/data/events";
 import { Card } from "@/components/ui/Card";
 import { GoldAmount } from "@/components/ui/GoldAmount";
 import { JoinEventButton } from "@/components/events/JoinEventButton";
 import { Calendar, Users, Trophy } from "lucide-react";
 import type { GuildEvent } from "@/types";
+
+export const metadata: Metadata = {
+  title: "Events — The Open Guild OS",
+  description: "Compete, collaborate, and earn legendary rewards.",
+};
 
 const TYPE_COLORS: Record<GuildEvent["type"], string> = {
   tournament: "text-amber-400 bg-amber-400/10 border-amber-400/30",

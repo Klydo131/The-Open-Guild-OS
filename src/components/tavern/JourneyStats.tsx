@@ -1,11 +1,12 @@
+import Link from "next/link";
 import { ScrollText, Star, Shield } from "lucide-react";
 import { Avatar } from "@/components/ui/Avatar";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 
 export function JourneyStats() {
   return (
-    <div className="rounded-xl bg-tavern-surface border border-tavern-border p-4">
-      <h3 className="font-heading text-sm font-bold text-parchment-200 uppercase tracking-wide mb-4">Your Journey</h3>
+    <Link href="/reputation" className="block rounded-xl bg-tavern-surface border border-tavern-border p-4 hover:border-tavern-border-glow transition-colors group">
+      <h3 className="font-heading text-sm font-bold text-parchment-200 uppercase tracking-wide mb-4 group-hover:text-gold-400 transition-colors">Your Journey</h3>
 
       <div className="flex items-center gap-3 mb-4">
         <Avatar initials="GM" size="lg" level={12} />
@@ -33,6 +34,6 @@ export function JourneyStats() {
           </div>
         ))}
       </div>
-    </div>
+    </Link>
   );
 }

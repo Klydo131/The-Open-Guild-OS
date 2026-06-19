@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
 import { Avatar } from "@/components/ui/Avatar";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Card } from "@/components/ui/Card";
 import { GoldAmount } from "@/components/ui/GoldAmount";
 import { Badge } from "@/components/ui/Badge";
 import { ScrollText, Star, Award, Clock, TrendingUp, Shield } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Your Journey — The Open Guild OS",
+  description: "Track your progress and reputation across the realm.",
+};
 
 const PROFILE_STATS = [
   { icon: ScrollText, label: "Quests Completed", value: "28" },

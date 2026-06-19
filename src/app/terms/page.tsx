@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
+
+export const metadata: Metadata = {
+  title: "Terms of Service — The Open Guild OS",
+  description: "The rules of the realm — fair and transparent terms for all artisans and quest posters.",
+};
 import { ScrollText } from "lucide-react";
 
 const TERMS_SECTIONS = [

@@ -1,10 +1,11 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Avatar } from "@/components/ui/Avatar";
 import { GoldAmount } from "@/components/ui/GoldAmount";
-import { Button } from "@/components/ui/Button";
+import { ActionButton } from "@/components/ui/ActionButton";
 import { quests } from "@/data/quests";
 import { CATEGORY_ICONS } from "@/lib/constants";
 import { cn, getDifficultyColor, getRarityColor } from "@/lib/utils";
@@ -12,6 +13,16 @@ import { ArrowLeft, Clock, Users, Calendar, Shield } from "lucide-react";
 
 export function generateStaticParams() {
   return quests.map((quest) => ({ id: quest.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const quest = quests.find((q) => q.id === id);
+  if (!quest) return { title: "Quest Not Found" };
+  return {
+    title: `${quest.title} — The Open Guild OS`,
+    description: quest.description,
+  };
 }
 
 export default async function QuestDetailPage({
@@ -129,12 +140,8 @@ export default async function QuestDetailPage({
       </Card>
 
       <div className="flex flex-col sm:flex-row gap-3">
-        <Button variant="primary" className="flex-1">
-          Apply for Quest
-        </Button>
-        <Button variant="secondary" className="flex-1">
-          Save for Later
-        </Button>
+        <ActionButton label="Apply for Quest" confirmedLabel="Application Sent!" className="flex-1" />
+        <ActionButton label="Save for Later" confirmedLabel="Saved!" variant="secondary" className="flex-1" />
       </div>
     </div>
   );

@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { PostQuestForm } from "@/components/bounties/PostQuestForm";
+
+export const metadata: Metadata = {
+  title: "Post a Quest — The Open Guild OS",
+  description: "Commission skilled artisans by posting a quest on the board.",
+};
 
 export default function BountiesPage() {
   return (

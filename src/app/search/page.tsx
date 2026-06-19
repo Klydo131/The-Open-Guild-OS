@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Search — The Open Guild OS",
+  description: "Search across quests, guilds, and artisans in The Open Guild OS.",
+};
 import { searchRealm } from "@/lib/search";
 import { QuestCard } from "@/components/quest/QuestCard";
 import { Card } from "@/components/ui/Card";

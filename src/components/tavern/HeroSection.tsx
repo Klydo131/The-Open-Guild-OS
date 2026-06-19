@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ScrollText, Users } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -22,14 +23,18 @@ export function HeroSection() {
             A digital tavern for doers and dreamers. Post quests. Earn gold. Build guilds. Govern together. Prosper as one.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Button variant="primary" size="lg">
-              <ScrollText className="w-5 h-5" />
-              Post a Quest
-            </Button>
-            <Button variant="secondary" size="lg">
-              <Users className="w-5 h-5" />
-              Join a Guild
-            </Button>
+            <Link href="/bounties">
+              <Button variant="primary" size="lg">
+                <ScrollText className="w-5 h-5" />
+                Post a Quest
+              </Button>
+            </Link>
+            <Link href="/guild-hall">
+              <Button variant="secondary" size="lg">
+                <Users className="w-5 h-5" />
+                Join a Guild
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

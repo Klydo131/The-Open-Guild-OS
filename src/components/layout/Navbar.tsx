@@ -1,18 +1,33 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, Plus, Mail, ChevronDown, Coins } from "lucide-react";
+import { Search, Plus, Coins } from "lucide-react";
+import { NotificationsDropdown } from "@/components/navbar/NotificationsDropdown";
+import { ProfileDropdown } from "@/components/navbar/ProfileDropdown";
 
 export function Navbar() {
   const router = useRouter();
   const [query, setQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = query.trim();
     if (trimmed) {
       router.push(`/search?q=${encodeURIComponent(trimmed)}`);
+      searchRef.current?.blur();
     }
   }
 
@@ -31,12 +46,16 @@ export function Navbar() {
         <div className="relative w-full">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-tavern-border-glow" />
           <input
+            ref={searchRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for quests, skills, or guilds..."
-            className="w-full bg-tavern-surface border border-tavern-border rounded-lg pl-10 pr-4 py-2 text-sm text-parchment-300 placeholder-tavern-border-glow focus:outline-none focus:border-gold-400/50 transition-colors"
+            placeholder="Search for quests, skills, or guilds... (⌘K)"
+            className="w-full bg-tavern-surface border border-tavern-border rounded-lg pl-10 pr-12 py-2 text-sm text-parchment-300 placeholder-tavern-border-glow focus:outline-none focus:border-gold-400/50 transition-colors"
           />
+          <kbd className="absolute right-3 top-1/2 -translate-y-1/2 hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-tavern-surface-alt border border-tavern-border text-[10px] text-tavern-border-glow font-mono">
+            ⌘K
+          </kbd>
         </div>
       </form>
 
@@ -50,33 +69,20 @@ export function Navbar() {
           <Search className="w-5 h-5" />
         </Link>
 
-        <div className="flex items-center gap-1.5 bg-tavern-surface border border-tavern-border rounded-lg px-3 py-1.5">
+        <Link href="/treasury" className="flex items-center gap-1.5 bg-tavern-surface border border-tavern-border rounded-lg px-3 py-1.5 hover:border-gold-400/30 transition-colors group">
           <Coins className="w-4 h-4 text-gold-500" />
           <span className="text-sm font-bold text-gold-400">2,450</span>
-          <Plus className="w-3 h-3 text-tavern-border-glow" />
-        </div>
+          <Plus className="w-3 h-3 text-tavern-border-glow group-hover:text-gold-400 transition-colors" />
+        </Link>
 
-        <div className="hidden sm:flex items-center gap-1.5 bg-tavern-surface border border-tavern-border rounded-lg px-3 py-1.5">
+        <Link href="/treasury" className="hidden sm:flex items-center gap-1.5 bg-tavern-surface border border-tavern-border rounded-lg px-3 py-1.5 hover:border-gem-400/30 transition-colors group">
           <span className="text-sm">💎</span>
           <span className="text-sm font-bold text-gem-400">260</span>
-          <Plus className="w-3 h-3 text-tavern-border-glow" />
-        </div>
+          <Plus className="w-3 h-3 text-tavern-border-glow group-hover:text-gem-400 transition-colors" />
+        </Link>
 
-        <button className="relative p-2 text-parchment-500 hover:text-parchment-300 transition-colors">
-          <Mail className="w-5 h-5" />
-          <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-red-500 rounded-full text-[8px] text-white flex items-center justify-center font-bold">2</span>
-        </button>
-
-        <button className="flex items-center gap-2 pl-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-tavern-border to-tavern-surface-alt flex items-center justify-center ring-2 ring-amber-400 text-xs font-bold text-parchment-300">
-            GM
-          </div>
-          <div className="hidden sm:block text-left">
-            <div className="text-xs font-medium text-parchment-200">Guildmaster</div>
-            <div className="text-[10px] text-tavern-border-glow">Level 12</div>
-          </div>
-          <ChevronDown className="w-3 h-3 text-tavern-border-glow hidden sm:block" />
-        </button>
+        <NotificationsDropdown />
+        <ProfileDropdown />
       </div>
     </header>
   );

@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
+
+export const metadata: Metadata = {
+  title: "About — The Open Guild OS",
+  description: "A freelancing platform forged in the spirit of the old guilds. Open source, community governed, built for artisans.",
+};
 import { Shield, Users, ScrollText, Flame, Code, Globe } from "lucide-react";
 
 const PRINCIPLES = [

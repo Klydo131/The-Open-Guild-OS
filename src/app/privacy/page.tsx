@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy — The Open Guild OS",
+  description: "Your data, your rules. How The Open Guild OS handles and protects your information.",
+};
 import { Shield, Eye, Lock, Trash2, Server, Bell } from "lucide-react";
 
 const PRIVACY_SECTIONS = [

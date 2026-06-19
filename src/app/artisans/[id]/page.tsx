@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
@@ -5,12 +6,22 @@ import { Badge } from "@/components/ui/Badge";
 import { Avatar } from "@/components/ui/Avatar";
 import { GoldAmount } from "@/components/ui/GoldAmount";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import { Button } from "@/components/ui/Button";
+import { ActionButton } from "@/components/ui/ActionButton";
 import { artisans } from "@/data/artisans";
 import { ArrowLeft, ScrollText, Star, Clock, Shield } from "lucide-react";
 
 export function generateStaticParams() {
   return artisans.map((artisan) => ({ id: artisan.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const artisan = artisans.find((a) => a.id === id);
+  if (!artisan) return { title: "Artisan Not Found" };
+  return {
+    title: `${artisan.displayName} — The Open Guild OS`,
+    description: `${artisan.title} — Level ${artisan.level} ${artisan.reputation} artisan with ${artisan.questsCompleted} quests completed.`,
+  };
 }
 
 const REPUTATION_COLORS: Record<string, string> = {
@@ -111,12 +122,13 @@ export default async function ArtisanDetailPage({
       </Card>
 
       <div className="flex flex-col sm:flex-row gap-3">
-        <Button variant="primary" className="flex-1" disabled={!artisan.available}>
-          {artisan.available ? "Hire Artisan" : "Currently Unavailable"}
-        </Button>
-        <Button variant="secondary" className="flex-1">
-          Send Message
-        </Button>
+        <ActionButton
+          label={artisan.available ? "Hire Artisan" : "Currently Unavailable"}
+          confirmedLabel="Request Sent!"
+          disabled={!artisan.available}
+          className="flex-1"
+        />
+        <ActionButton label="Send Message" confirmedLabel="Message Sent!" variant="secondary" className="flex-1" />
       </div>
     </div>
   );

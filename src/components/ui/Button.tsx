@@ -12,7 +12,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center gap-2 font-heading font-bold uppercase tracking-wider transition-all duration-200 rounded-lg",
+          "inline-flex items-center justify-center gap-2 font-heading font-bold uppercase tracking-wider transition-all duration-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
           {
             "bg-gold-400 hover:bg-gold-300 text-tavern-bg shadow-lg shadow-gold-400/20 hover:shadow-gold-400/40": variant === "primary",
             "bg-tavern-surface-alt border border-tavern-border-glow text-parchment-300 hover:bg-tavern-border hover:border-gold-400/50": variant === "secondary",

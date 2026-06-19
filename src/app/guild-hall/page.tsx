@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { GuildHallClient } from "@/components/tavern/GuildHallClient";
+
+export const metadata: Metadata = {
+  title: "Guild Hall — The Open Guild OS",
+  description: "Browse and join guilds to collaborate with fellow artisans.",
+};
 
 export default function GuildHallPage() {
   return (

@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
+
+export const metadata: Metadata = {
+  title: "Contact — The Open Guild OS",
+  description: "Reach out to the guild council for support, partnerships, or feedback.",
+};
 import { ContactForm } from "@/components/contact/ContactForm";
 import { MessageSquare, Code2, Mail } from "lucide-react";
 

@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { ArtisansClient } from "@/components/tavern/ArtisansClient";
+
+export const metadata: Metadata = {
+  title: "Artisans — The Open Guild OS",
+  description: "Discover skilled artisans ready to bring your vision to life.",
+};
 
 export default function ArtisansPage() {
   return (

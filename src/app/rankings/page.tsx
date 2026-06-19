@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import { guilds } from "@/data/guilds";
 import { Card } from "@/components/ui/Card";
 import { GoldAmount } from "@/components/ui/GoldAmount";
 import { cn } from "@/lib/utils";
 import { Users, ScrollText, Star, Trophy } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Rankings — The Open Guild OS",
+  description: "See the top guilds and artisans across the realm.",
+};
 
 const PODIUM_STYLES = [
   "bg-amber-500/20 text-amber-400 ring-2 ring-amber-500/30",

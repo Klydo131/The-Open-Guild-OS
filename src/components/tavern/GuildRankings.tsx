@@ -23,7 +23,11 @@ export function GuildRankings() {
 
       <div className="space-y-3">
         {topGuilds.map((guild, index) => (
-          <div key={guild.id} className="flex items-center gap-3">
+          <Link
+            key={guild.id}
+            href={`/guild-hall/${guild.id}`}
+            className="flex items-center gap-3 group"
+          >
             <div className={cn(
               "w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0",
               RANK_STYLES[index] ?? "bg-tavern-surface-alt text-tavern-border-glow",
@@ -36,7 +40,7 @@ export function GuildRankings() {
             </div>
 
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium text-parchment-200 truncate">{guild.name}</div>
+              <div className="text-sm font-medium text-parchment-200 truncate group-hover:text-gold-400 transition-colors">{guild.name}</div>
               <div className="text-[10px] text-tavern-border-glow">Level {guild.level}</div>
             </div>
 
@@ -44,7 +48,7 @@ export function GuildRankings() {
               <Coins className="w-3 h-3 text-gold-500" />
               {formatGold(guild.totalGold)}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

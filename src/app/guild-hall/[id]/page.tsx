@@ -1,14 +1,25 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { GoldAmount } from "@/components/ui/GoldAmount";
-import { Button } from "@/components/ui/Button";
+import { ActionButton } from "@/components/ui/ActionButton";
 import { guilds } from "@/data/guilds";
 import { ArrowLeft, Users, ScrollText, Star, Trophy, Shield } from "lucide-react";
 
 export function generateStaticParams() {
   return guilds.map((guild) => ({ id: guild.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const guild = guilds.find((g) => g.id === id);
+  if (!guild) return { title: "Guild Not Found" };
+  return {
+    title: `${guild.name} — The Open Guild OS`,
+    description: `${guild.description} Level ${guild.level} guild with ${guild.memberCount} members.`,
+  };
 }
 
 export default async function GuildDetailPage({
@@ -112,12 +123,8 @@ export default async function GuildDetailPage({
       </Card>
 
       <div className="flex flex-col sm:flex-row gap-3">
-        <Button variant="primary" className="flex-1">
-          Apply to Join
-        </Button>
-        <Button variant="secondary" className="flex-1">
-          View Members
-        </Button>
+        <ActionButton label="Apply to Join" confirmedLabel="Application Sent!" className="flex-1" />
+        <ActionButton label="View Members" confirmedLabel="Request Sent!" variant="secondary" className="flex-1" />
       </div>
     </div>
   );

@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
 import { Coins, ArrowUpRight, ArrowDownLeft } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Treasury — The Open Guild OS",
+  description: "Manage your gold, gems, and transaction history.",
+};
 
 const transactions = [
   { id: "t1", type: "earned" as const, description: "Completed: Forge a Payment Gateway", amount: 750, date: "2 days ago" },

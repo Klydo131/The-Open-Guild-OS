@@ -21,15 +21,19 @@ export function TavernNotice() {
         {upcomingEvents.map((event) => {
           const Icon = EVENT_ICONS[event.type] ?? Calendar;
           return (
-            <div key={event.id} className="flex items-start gap-3 p-2 rounded-lg hover:bg-tavern-surface-alt transition-colors cursor-pointer">
+            <Link
+              key={event.id}
+              href="/events"
+              className="flex items-start gap-3 p-2 rounded-lg hover:bg-tavern-surface-alt transition-colors group"
+            >
               <div className="w-8 h-8 rounded-lg bg-tavern-surface-alt border border-tavern-border flex items-center justify-center shrink-0">
                 <Icon className="w-4 h-4 text-gold-400" />
               </div>
               <div>
-                <div className="text-sm font-medium text-parchment-200">{event.name}</div>
+                <div className="text-sm font-medium text-parchment-200 group-hover:text-gold-400 transition-colors">{event.name}</div>
                 <div className="text-[10px] text-tavern-border-glow">{event.startDate}{event.endDate ? ` – ${event.endDate}` : ""}</div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
