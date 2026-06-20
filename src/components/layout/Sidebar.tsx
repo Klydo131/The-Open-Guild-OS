@@ -33,7 +33,7 @@ export function Sidebar() {
       {/* Logo */}
       <div className="px-4 mb-6">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-400 to-gold-500 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-400 to-gold-500 flex items-center justify-center animate-glow">
             <Shield className="w-6 h-6 text-tavern-bg" />
           </div>
           <div>

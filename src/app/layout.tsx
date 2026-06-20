@@ -4,6 +4,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Navbar } from "@/components/layout/Navbar";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -49,6 +50,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <MobileNav />
+        <ScrollToTop />
       </body>
     </html>
   );

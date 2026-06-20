@@ -6,8 +6,8 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden border-b border-tavern-border/50">
       <div className="absolute inset-0 bg-gradient-to-b from-tavern-surface via-tavern-bg to-tavern-bg" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gold-400/[0.04] rounded-full blur-[150px]" />
-      <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-gold-500/[0.03] rounded-full blur-[100px]" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gold-400/[0.04] rounded-full blur-[150px] animate-glow" />
+      <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-gold-500/[0.03] rounded-full blur-[100px] animate-float" />
 
       <div className="relative max-w-5xl mx-auto px-4 py-20 lg:py-28">
         <div className="max-w-2xl">

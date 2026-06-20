@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   title: "About — The Open Guild OS",
   description: "A freelancing platform forged in the spirit of the old guilds. Open source, community governed, built for artisans.",
 };
-import { Shield, Users, ScrollText, Flame, Code, Globe } from "lucide-react";
+import Link from "next/link";
+import { Shield, Users, ScrollText, Flame, Code, Globe, ExternalLink } from "lucide-react";
 
 const PRINCIPLES = [
   {
@@ -107,11 +108,21 @@ export default function AboutPage() {
 
       <Card variant="dark" className="p-5">
         <h2 className="font-heading text-sm font-bold text-parchment-200 uppercase tracking-wide mb-2">Contribute</h2>
-        <p className="text-xs text-parchment-500 leading-relaxed">
+        <p className="text-xs text-parchment-500 leading-relaxed mb-4">
           The Open Guild OS is open source. Whether you&apos;re a developer, designer, writer, or just someone
           who believes freelancers deserve better — there&apos;s a place for you at the tavern table. Check out
           our repository, open an issue, or join a guild to start contributing.
         </p>
+        <Link
+          href="https://github.com/klydo131/the-open-guild-os"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-heading font-bold uppercase tracking-wider text-gold-400 hover:text-gold-300 transition-colors"
+        >
+          <Code className="w-4 h-4" />
+          View on GitHub
+          <ExternalLink className="w-3 h-3" />
+        </Link>
       </Card>
     </div>
   );
