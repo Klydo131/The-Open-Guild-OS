@@ -34,7 +34,7 @@ export function MobileNav() {
     <>
       {/* "More" sheet overlay */}
       {moreOpen && (
-        <div className="lg:hidden fixed inset-0 z-50">
+        <div role="dialog" aria-label="More navigation options" className="lg:hidden fixed inset-0 z-50">
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setMoreOpen(false)}
@@ -79,7 +79,7 @@ export function MobileNav() {
         </div>
       )}
 
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-tavern-bg/95 backdrop-blur-sm border-t border-tavern-border">
+      <nav aria-label="Mobile navigation" className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-tavern-bg/95 backdrop-blur-sm border-t border-tavern-border">
         <div className="flex items-center justify-around py-2">
           {primaryItems.map((item) => {
             const isActive = pathname === item.href;
@@ -87,6 +87,7 @@ export function MobileNav() {
               <Link
                 key={item.label}
                 href={item.href}
+                aria-current={isActive ? "page" : undefined}
                 className={cn(
                   "flex flex-col items-center gap-0.5 px-3 py-1 transition-colors",
                   isActive ? "text-gold-400" : "text-tavern-border-glow"

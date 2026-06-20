@@ -36,10 +36,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cinzel.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex bg-tavern-bg text-parchment-300" style={{ fontFamily: "var(--font-body)" }}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-gold-400 focus:text-tavern-bg focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-bold"
+        >
+          Skip to main content
+        </a>
         <Sidebar />
         <div className="flex-1 flex flex-col min-h-screen">
           <Navbar />
-          <main className="flex-1 pb-16 lg:pb-0">{children}</main>
+          <main id="main-content" className="flex-1 pb-16 lg:pb-0">{children}</main>
           <Footer />
         </div>
         <MobileNav />

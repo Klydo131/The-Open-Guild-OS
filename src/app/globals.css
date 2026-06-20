@@ -84,6 +84,12 @@
   color: var(--color-gold-50);
 }
 
+:focus-visible {
+  outline: 2px solid var(--color-gold-400);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 html {
   scroll-behavior: smooth;
 }
