@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { Search, Plus, Coins } from "lucide-react";
 import { NotificationsDropdown } from "@/components/navbar/NotificationsDropdown";
 import { ProfileDropdown } from "@/components/navbar/ProfileDropdown";
+import { userProfile } from "@/data/user";
+import { formatGold } from "@/lib/utils";
 
 export function Navbar() {
   const router = useRouter();
@@ -71,13 +73,13 @@ export function Navbar() {
 
         <Link href="/treasury" className="flex items-center gap-1.5 bg-tavern-surface border border-tavern-border rounded-lg px-3 py-1.5 hover:border-gold-400/30 transition-colors group">
           <Coins className="w-4 h-4 text-gold-500" />
-          <span className="text-sm font-bold text-gold-400">2,450</span>
+          <span className="text-sm font-bold text-gold-400">{formatGold(userProfile.gold)}</span>
           <Plus className="w-3 h-3 text-tavern-border-glow group-hover:text-gold-400 transition-colors" />
         </Link>
 
         <Link href="/treasury" className="hidden sm:flex items-center gap-1.5 bg-tavern-surface border border-tavern-border rounded-lg px-3 py-1.5 hover:border-gem-400/30 transition-colors group">
           <span className="text-sm">💎</span>
-          <span className="text-sm font-bold text-gem-400">260</span>
+          <span className="text-sm font-bold text-gem-400">{formatGold(userProfile.gems)}</span>
           <Plus className="w-3 h-3 text-tavern-border-glow group-hover:text-gem-400 transition-colors" />
         </Link>
 

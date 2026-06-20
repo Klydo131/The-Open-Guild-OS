@@ -4,12 +4,13 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ChevronDown, User, Award, Coins, Settings, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { userProfile } from "@/data/user";
 
 const MENU_ITEMS = [
   { label: "Profile", href: "/reputation", icon: User },
   { label: "Reputation", href: "/reputation", icon: Award },
   { label: "Treasury", href: "/treasury", icon: Coins },
-  { label: "Settings", href: "#", icon: Settings },
+  { label: "Settings", href: "/settings", icon: Settings },
 ];
 
 export function ProfileDropdown() {
@@ -33,11 +34,11 @@ export function ProfileDropdown() {
         className="flex items-center gap-2 pl-2"
       >
         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-tavern-border to-tavern-surface-alt flex items-center justify-center ring-2 ring-amber-400 text-xs font-bold text-parchment-300">
-          GM
+          {userProfile.name.slice(0, 2).toUpperCase()}
         </div>
         <div className="hidden sm:block text-left">
-          <div className="text-xs font-medium text-parchment-200">Guildmaster</div>
-          <div className="text-[10px] text-tavern-border-glow">Level 12</div>
+          <div className="text-xs font-medium text-parchment-200">{userProfile.name}</div>
+          <div className="text-[10px] text-tavern-border-glow">Level {userProfile.level}</div>
         </div>
         <ChevronDown className={cn(
           "w-3 h-3 text-tavern-border-glow hidden sm:block transition-transform duration-200",
@@ -48,8 +49,8 @@ export function ProfileDropdown() {
       {open && (
         <div className="absolute right-0 top-full mt-2 w-52 bg-tavern-surface border border-tavern-border rounded-xl shadow-xl shadow-black/40 overflow-hidden z-50">
           <div className="px-4 py-3 border-b border-tavern-border">
-            <p className="text-sm font-heading font-bold text-parchment-200">Guildmaster</p>
-            <p className="text-[10px] text-tavern-border-glow">Full-Stack Artisan — Highline Guild</p>
+            <p className="text-sm font-heading font-bold text-parchment-200">{userProfile.name}</p>
+            <p className="text-[10px] text-tavern-border-glow">{userProfile.title} — {userProfile.guild}</p>
           </div>
 
           <div className="py-1">

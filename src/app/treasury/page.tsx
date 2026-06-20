@@ -1,20 +1,9 @@
 import type { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
+import { transactions } from "@/data/transactions";
+import { userProfile } from "@/data/user";
+import { formatGold } from "@/lib/utils";
 import { Coins, ArrowUpRight, ArrowDownLeft } from "lucide-react";
-
-export const metadata: Metadata = {
-  title: "Treasury — The Open Guild OS",
-  description: "Manage your gold, gems, and transaction history.",
-};
-
-const transactions = [
-  { id: "t1", type: "earned" as const, description: "Completed: Forge a Payment Gateway", amount: 750, date: "2 days ago" },
-  { id: "t2", type: "spent" as const, description: "Guild dues — Highline Guild", amount: 50, date: "5 days ago" },
-  { id: "t3", type: "earned" as const, description: "Completed: Design the Elysium Crest", amount: 400, date: "1 week ago" },
-  { id: "t4", type: "earned" as const, description: "Bounty bonus: Early delivery", amount: 100, date: "1 week ago" },
-  { id: "t5", type: "spent" as const, description: "Skill upgrade: Web3 Basics", amount: 200, date: "2 weeks ago" },
-  { id: "t6", type: "earned" as const, description: "Completed: Data Pipeline Optimization", amount: 550, date: "2 weeks ago" },
-];
 
 export default function TreasuryPage() {
   return (
@@ -27,7 +16,7 @@ export default function TreasuryPage() {
       <Card variant="featured" className="p-6 mb-6">
         <div className="text-center">
           <Coins className="w-10 h-10 text-gold-400 mx-auto mb-3" />
-          <div className="text-3xl font-bold text-gold-400 font-heading">2,450</div>
+          <div className="text-3xl font-bold text-gold-400 font-heading">{formatGold(userProfile.gold)}</div>
           <p className="text-sm text-parchment-500 mt-1">Gold Balance</p>
           <div className="flex justify-center gap-6 mt-4 text-xs">
             <div>
