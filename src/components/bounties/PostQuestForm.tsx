@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { QUEST_CATEGORIES, DIFFICULTY_TIERS } from "@/lib/constants";
+import { FIELD_LIMITS, isRequired, hasMinLength, isPositiveNumber } from "@/lib/validation";
 import { ScrollText, CheckCircle } from "lucide-react";
 
 type FormState = "idle" | "submitting" | "success";
@@ -41,13 +42,13 @@ export function PostQuestForm() {
 
   function validate(): boolean {
     const next: Partial<Record<keyof QuestForm, string>> = {};
-    if (!form.title.trim()) next.title = "Quest title is required";
-    if (!form.description.trim()) next.description = "Description is required";
-    else if (form.description.trim().length < 20) next.description = "Description must be at least 20 characters";
+    if (!isRequired(form.title)) next.title = "Quest title is required";
+    if (!isRequired(form.description)) next.description = "Description is required";
+    else if (!hasMinLength(form.description, 20)) next.description = "Description must be at least 20 characters";
     if (!form.budget) next.budget = "Budget is required";
-    else if (Number(form.budget) <= 0) next.budget = "Budget must be greater than 0";
+    else if (!isPositiveNumber(form.budget)) next.budget = "Budget must be greater than 0";
     if (!form.deadline) next.deadline = "Deadline is required";
-    if (!form.skills.trim()) next.skills = "At least one skill is required";
+    if (!isRequired(form.skills)) next.skills = "At least one skill is required";
     setErrors(next);
     return Object.keys(next).length === 0;
   }
@@ -110,6 +111,7 @@ export function PostQuestForm() {
             value={form.title}
             onChange={(e) => handleChange("title", e.target.value)}
             className={inputClass}
+            maxLength={FIELD_LIMITS.title}
           />
           {errors.title && <p className="text-xs text-ember-400 mt-1">{errors.title}</p>}
         </div>
@@ -123,6 +125,7 @@ export function PostQuestForm() {
             value={form.description}
             onChange={(e) => handleChange("description", e.target.value)}
             className={`${inputClass} resize-y min-h-[100px]`}
+            maxLength={FIELD_LIMITS.description}
           />
           {errors.description && <p className="text-xs text-ember-400 mt-1">{errors.description}</p>}
         </div>
@@ -164,6 +167,7 @@ export function PostQuestForm() {
               type="number"
               placeholder="500"
               min="0"
+              max="100000000"
               value={form.budget}
               onChange={(e) => handleChange("budget", e.target.value)}
               className={inputClass}
@@ -192,6 +196,7 @@ export function PostQuestForm() {
             value={form.skills}
             onChange={(e) => handleChange("skills", e.target.value)}
             className={inputClass}
+            maxLength={FIELD_LIMITS.skills}
           />
           {errors.skills && <p className="text-xs text-ember-400 mt-1">{errors.skills}</p>}
           <p className="text-[10px] text-tavern-border-glow mt-1">Separate skills with commas</p>

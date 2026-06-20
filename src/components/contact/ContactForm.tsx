@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { FIELD_LIMITS, isValidEmail, isRequired, hasMinLength } from "@/lib/validation";
 import { Send, CheckCircle } from "lucide-react";
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -31,10 +32,6 @@ const inputClass =
 const selectClass =
   "w-full bg-tavern-bg border border-tavern-border rounded-lg px-3 py-2 text-sm text-parchment-300 focus:outline-none focus:border-gold-600 focus:ring-1 focus:ring-gold-600/30 transition-colors appearance-none";
 
-function validateEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
 export function ContactForm() {
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [state, setState] = useState<FormState>("idle");
@@ -42,12 +39,12 @@ export function ContactForm() {
 
   function validate(): boolean {
     const next: Partial<Record<keyof FormData, string>> = {};
-    if (!form.name.trim()) next.name = "Name is required";
-    if (!form.email.trim()) next.email = "Email is required";
-    else if (!validateEmail(form.email)) next.email = "Enter a valid email address";
+    if (!isRequired(form.name)) next.name = "Name is required";
+    if (!isRequired(form.email)) next.email = "Email is required";
+    else if (!isValidEmail(form.email)) next.email = "Enter a valid email address";
     if (!form.subject) next.subject = "Select a subject";
-    if (!form.message.trim()) next.message = "Message is required";
-    else if (form.message.trim().length < 10) next.message = "Message must be at least 10 characters";
+    if (!isRequired(form.message)) next.message = "Message is required";
+    else if (!hasMinLength(form.message, 10)) next.message = "Message must be at least 10 characters";
     setErrors(next);
     return Object.keys(next).length === 0;
   }
@@ -105,6 +102,7 @@ export function ContactForm() {
             onChange={(e) => handleChange("name", e.target.value)}
             className={inputClass}
             autoComplete="name"
+            maxLength={FIELD_LIMITS.name}
           />
           {errors.name && <p className="text-xs text-ember-400 mt-1">{errors.name}</p>}
         </div>
@@ -121,6 +119,7 @@ export function ContactForm() {
             onChange={(e) => handleChange("email", e.target.value)}
             className={inputClass}
             autoComplete="email"
+            maxLength={FIELD_LIMITS.email}
           />
           {errors.email && <p className="text-xs text-ember-400 mt-1">{errors.email}</p>}
         </div>
@@ -154,6 +153,7 @@ export function ContactForm() {
             value={form.message}
             onChange={(e) => handleChange("message", e.target.value)}
             className={`${inputClass} resize-y min-h-[100px]`}
+            maxLength={FIELD_LIMITS.message}
           />
           {errors.message && <p className="text-xs text-ember-400 mt-1">{errors.message}</p>}
         </div>
